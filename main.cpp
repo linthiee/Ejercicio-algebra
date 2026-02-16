@@ -3,20 +3,19 @@
 
 void cameraControl(Camera3D& camera, float cameraSpeed);
 
+
 void main()
 {
-	object object;
-	object.vertices.resize(8);
 
-	object.vertices[0] = { 0, 0, 0 };
-	object.vertices[1] = { 0, 1, 0 };
-	object.vertices[2] = { 1, 1, 0 };
-	object.vertices[3] = { 1, 0, 0 };
+	//cube.vertices[4] = { 0, 0, 1 };
+	//cube.vertices[5] = { 0, 1, 1 };
+	//cube.vertices[6] = { 1, 1, 1 };
+	//cube.vertices[7] = { 1, 0, 1 };
 
-	object.vertices[4] = { 0, 0, 1 };
-	object.vertices[5] = { 0, 1, 1 };
-	object.vertices[6] = { 1, 1, 1 };
-	object.vertices[7] = { 1, 0, 1 };
+	//cube.vertices[4] = cube.vertices[4] * cube.scale;
+	//cube.vertices[5] = cube.vertices[5] * cube.scale;
+	//cube.vertices[6] = cube.vertices[6] * cube.scale;
+	//cube.vertices[7] = cube.vertices[7] * cube.scale;
 
 	Camera3D camera = { 0 };
 	camera.position = { 4.0f, 4.0f, 4.0f };
@@ -27,6 +26,9 @@ void main()
 	float cameraSpeed = 0.2f;
 
 	InitWindow(screenWidth, screenHeight, "ejercicio");
+
+	object cube = createFigure(figureType::Cube, 2.0f);
+	object prism = createFigure(figureType::Prism, 2.0f);
 
 	while (!WindowShouldClose())
 	{
@@ -41,17 +43,11 @@ void main()
 		ClearBackground(RAYWHITE);
 		BeginMode3D(camera);
 
-		for (int i = 0; i < object.vertices.size(); i++)
-		{
-			DrawCircle3D({ object.vertices[i].x * 2.0f , object.vertices[i].y * 2.0f, object.vertices[i].z }, 0.05f, { 0,0,0 }, 0, RED);
-		}
+		getFigureFacesFromIndexes(cube);
+		getFigureFacesFromIndexes(prism);
 
-		for (int i = 0; i < object.vertices.size() / 2; i++)
-		{
-			DrawLine3D(object.vertices[i], object.vertices[(i + 1) % 4], BLUE);
-			DrawLine3D(object.vertices[i + 4], object.vertices[((i + 1) % 4) + 4], BLUE);
-			DrawLine3D(object.vertices[i], object.vertices[i + 4], BLUE);
-		}
+		draw(cube.positions, cube.vertices);
+		//draw(prism.positions, prism.vertices);
 
 		DrawGrid(20, 1.0f);
 		EndMode3D();
@@ -72,3 +68,4 @@ void cameraControl(Camera3D& camera, float cameraSpeed)
 	if (IsKeyDown(KEY_Q)) camera.position.y += cameraSpeed;
 	if (IsKeyDown(KEY_E)) camera.position.y -= cameraSpeed;
 }
+

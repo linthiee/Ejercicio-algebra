@@ -5,22 +5,39 @@
 #include <vector>
 #include <string>
 
+enum class figureType
+{
+	Cube,
+	Prism,
+	Dodecahedro
+};
+
 struct object
 {
+	figureType type;
+
 	Vector3 pos;
 
 	//Option 2
 	Vector3 up;
 	float rot;
 
-	Vector3 scale;
+	float scale;
 
 	std::vector<Vector3> vertices;
+	std::vector<int> index;
+	std::vector<Vector3> positions;
 
 	Color color;
 };
 
-void draw();
+Vector3 operator*(Vector3& vector1, float scalar);
+
+object createFigure(figureType type, float scalar);
+
+void getFigureFacesFromIndexes(object& object);
+
+void draw(const std::vector<Vector3> positions, const std::vector<Vector3> vertices);
 //
 //std::string toString()
 //{
