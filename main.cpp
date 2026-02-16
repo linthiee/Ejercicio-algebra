@@ -30,6 +30,9 @@ void main()
 	object cube = createFigure(figureType::Cube, 2.0f);
 	object prism = createFigure(figureType::Prism, 2.0f);
 
+	getFigureFacesFromIndexes(cube);
+	getFigureFacesFromIndexes(prism);
+
 	while (!WindowShouldClose())
 	{
 		// Update
@@ -43,11 +46,8 @@ void main()
 		ClearBackground(RAYWHITE);
 		BeginMode3D(camera);
 
-		getFigureFacesFromIndexes(cube);
-		getFigureFacesFromIndexes(prism);
-
-		draw(cube.positions, cube.vertices);
-		//draw(prism.positions, prism.vertices);
+		draw(cube.positions, cube.vertices, cube.color);
+		draw(prism.positions, prism.vertices, prism.color);
 
 		DrawGrid(20, 1.0f);
 		EndMode3D();

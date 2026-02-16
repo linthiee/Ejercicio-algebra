@@ -37,7 +37,7 @@ object createFigure(figureType type, float scalar);
 
 void getFigureFacesFromIndexes(object& object);
 
-void draw(const std::vector<Vector3> positions, const std::vector<Vector3> vertices);
+void draw(const std::vector<Vector3>& positions, const std::vector<Vector3>& vertices, const Color& color);
 //
 //std::string toString()
 //{
